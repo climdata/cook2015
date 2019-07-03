@@ -1,0 +1,7 @@
+Add Tooltip SPI
+Add Legend SPI & Tambora
+Add backlinks to Github, Tambora, Cook-Article 
+Add Source
+
+Add example for openlayer
+
