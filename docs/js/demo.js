@@ -116,9 +116,24 @@ map.removeLayer(markerClusters);
 
 for ( var i = 0; i < data.features.length; ++i )
 {
-  var popup = '<b>Node:</b> ' + data.features[i].properties.node_label + 
-              '<br/><b>Value:</b> ' + data.features[i].properties.value_label +
-              '<br/><b>Quote:</b> ' + data.features[i].properties.quote_text;
+  var popup = '<b>Node:</b> ' + data.features[i].properties.node_label  
+              + '<br/><b>Value:</b> ' + data.features[i].properties.value_label 
+              + '<hr style="margin:1px;"/><b>Quote:</b> ' + data.features[i].properties.quote_text;
+    if(data.features[i].properties.public) {			  
+      popup += '<hr style="margin:1px;"/><b>Source:</b> ' 
+                + data.features[i].properties.source_author /* + '('+'yyyy'+'): ' */		  
+			    + ': ' + data.features[i].properties.source_title;
+	}
+	if(data.features[i].properties.doi) {
+      popup += '<hr style="margin:1px;"/><b>DOI:</b> '
+	        + '<a target="_blank" href="https://dx.doi.org/' + data.features[i].properties.doi + '">'
+			+ data.features[i].properties.doi + '</a>';
+	}
+	if(data.features[i].properties.public) {
+	  popup += '<br/><b>More details on:</b> <a target="_blank" href="https://www.tambora.org/index.php/grouping/event/list?g[qid]=' 
+			    + data.features[i].properties.quote_id.toString() + '" >tambora.org</a>';
+	}			
+
   var m = L.marker( [data.features[i].properties.latitude, data.features[i].properties.longitude], {icon: getMarker(data.features[i].properties)} )
                   .bindPopup( popup ); 
   markerClusters.addLayer( m );

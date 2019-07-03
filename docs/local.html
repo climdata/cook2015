@@ -2,7 +2,7 @@
 <head> 
   <meta charset="utf-8">
   <title>Drought Explorer</title>
-  <!--link rel="shortcut icon" href="images/tambora.ico" -->
+  <link rel="shortcut icon" href="images/tambora.ico">
   <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet" >
   <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css" type="text/css" rel="stylesheet" >
   <link href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" type="text/css" rel="stylesheet"/>
@@ -24,7 +24,7 @@
    <div class="col-md-2"> <!-- Right Side -->
    </div> <!-- end md-2 -->
    <div class="col-md-8 "> <!-- -Left Side -->
-     <h2 style="text-align: center;">Drought Explorer</h2>
+     <h2 style="text-align: center;">Drought Explorer  <a href='https://github.com/climdata/cook2015' ><i class='github icon'></i></a><a href='https://www.tambora.org'><img src='images/tambora-logo-red.png'></a>  </h2>
      <div id='yearslider' class="slidecontainer"> 
        <div class="container-fluid full-width">	   
          <div class="row-fluid" style="text-align: center;">
@@ -36,10 +36,12 @@
        <input type="range" v-bind:min="min" v-bind:max="max" v-bind:value="year2" class="slider" id="myRange" v-on:input="slide($event)" v-on:change="redraw($event)">
 	 </div>
      <div id="map"></div>
+	 <p>Compares data from <a href='https://doi.org/10.1126/sciadv.1500561'><b>Old World Drought Atlas</b> (Cook et al 2015)</a> and from <a href='https://www.tambora.org'><b>tambora.org</b></a></p>
    </div> <!-- end md-8 -->
    <div class="col-md-2"> <!-- Right Side -->
    </div> <!-- end md-2 -->
   </div> <!-- end row -->
+
  </div> <!-- end container-fluid -->
  
  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
