@@ -171,7 +171,7 @@ function LayerStyle(feature) {
 var vueSlider = new Vue({
   el: '#yearslider',
   data: {
-	min: 0000,  
+	min: 1000,  
 	max: 2012,
     year: 'init',
 	year2: 1540
