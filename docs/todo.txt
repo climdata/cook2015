@@ -1,8 +1,11 @@
 null: Value or Author
+https://climdata.github.io/cook2015/#1690  Source-length, precipitation
 
 Add Legend Tambora
 Add Diagramm of Number of Drought Events (in slider  if possible)
 Switch On/Off Layer
+
+Add center&zoom to URL location.hash (Google: @47.9830391,7.8507009,16z)
 
 Add example for openlayer
 Add modes for own index, clustered on/off, ...
