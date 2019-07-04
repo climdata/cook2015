@@ -116,21 +116,26 @@ map.removeLayer(markerClusters);
 
 for ( var i = 0; i < data.features.length; ++i )
 {
+  var quote = data.features[i].properties.quote_text;
+  if(quote.length > 1024) {
+     quote = quote.substr(0,1020) + ' ...';
+  }	  
   var popup = '<b>Node:</b> ' + data.features[i].properties.node_label  
               + '<br/><b>Value:</b> ' + data.features[i].properties.value_label 
-              + '<hr style="margin:1px;"/><b>Quote:</b> ' + data.features[i].properties.quote_text;
+              + '<hr style="margin:1px;"/><b>Quote:</b> ' + quote;
     if(data.features[i].properties.public) {			  
       popup += '<hr style="margin:1px;"/><b>Source:</b> ' 
                 + data.features[i].properties.source_author /* + '('+'yyyy'+'): ' */		  
-			    + ': ' + data.features[i].properties.source_title;
+			    + ': ' + data.features[i].properties.source_title
+				+ '<hr style="margin:1px;"/>'
 	}
+	
 	if(data.features[i].properties.doi) {
-      popup += '<hr style="margin:1px;"/><b>DOI:</b> '
-	        + '<a target="_blank" href="https://dx.doi.org/' + data.features[i].properties.doi + '">'
-			+ data.features[i].properties.doi + '</a>';
+      popup += '<b>DOI:</b> <a target="_blank" href="https://dx.doi.org/' + data.features[i].properties.doi + '">'
+			+ data.features[i].properties.doi + '</a><br/>';
 	}
 	if(data.features[i].properties.public) {
-	  popup += '<br/><b>More details on:</b> <a target="_blank" href="https://www.tambora.org/index.php/grouping/event/list?g[qid]=' 
+	  popup += '<b>More details on:</b> <a target="_blank" href="https://www.tambora.org/index.php/grouping/event/list?g[qid]=' 
 			    + data.features[i].properties.quote_id.toString() + '" >tambora.org</a>';
 	}			
 
@@ -143,6 +148,32 @@ map.addLayer( markerClusters );
 
 }; 
 
+ 
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend');
+	/*
+	for (var key in iconCodes){
+      var iconData = iconCodes[key];
+	  div.innerHTML += '<i style="background:' + iconData['markerColor'] + '; color:'+iconData['iconColor']+'"> <i class="icon '+iconData['icon']+'"></i></i> '+key+'<br/>';
+   }
+	*/
+    div.innerHTML += '<b>scPDSI</b><br/>';
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 6; i >= -6; i-=2) {
+		var amount = (i + 6.0) / 12.0;
+		var color = interpolateColor('#8d2200', '#93ff93', amount);
+        div.innerHTML += '<i style="background:' + color + '"></i> ' + i.toString() + '<br>';
+}
+
+return div;
+};
+
+legend.addTo(map);
+ 
  
   
 function interpolateColor(a, b, amount) { 
@@ -210,9 +241,10 @@ var vueSlider = new Vue({
 	},
 	update(year) {
 	   this.year = year;
-       this.year2 = parseInt(year); 	   
+       //this.year2 = parseInt(year); 	   
 	},
 	load(year) {
+		this.year2 = parseInt(year);
 		this.year = '...loading...';
 		var century = Math.floor(parseInt(year)/100);
 		var geoJsonUrl = 'https://raw.githubusercontent.com/climdata/cook2015/master/geoJson/century_'+century.toString()+'/drought_'+year+'.json';

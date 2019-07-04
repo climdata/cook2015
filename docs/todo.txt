@@ -1,5 +1,7 @@
+null: Value or Author
+
 Add Tooltip SPI
-Add Legend SPI & Tambora
+Add Legend Tambora
 Add Diagramm of Number of Drought Events (in slider  if possible)
 Switch On/Off Layer
 Add year to URL
