@@ -10,12 +10,15 @@ var OpenStreetMap_DE = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmd
 			+ '| <a href="https://www.tambora.org">tambora.org</a>'
 }).addTo(map);
 
-var geojsonLayerWells = new L.GeoJSON();
+function onEachFeature(feature, layer) {
+    if (feature.properties && feature.properties.scPDSI) {
+        layer.bindPopup('<b>scPDSI</b><br/><b>'+feature.properties.scPDSI.toString()+'</b>');
+    }
+}
+
+var geojsonLayerWells = new L.GeoJSON([], {onEachFeature: onEachFeature});
 map.addLayer(geojsonLayerWells);
-//geojsonLayerWells.on('click', onMapClick);
 
-
-	
 function loadGeoJson(data) {
 	geojsonLayerWells.clearLayers();
     geojsonLayerWells.addData(data);
@@ -23,7 +26,7 @@ function loadGeoJson(data) {
   }; 
 
 var geojsonLayerTmbs = new L.GeoJSON();
-map.addLayer(geojsonLayerWells);
+map.addLayer(geojsonLayerTmbs);
 
 function TmbLayerStyle(feature) {
     return {
@@ -208,7 +211,6 @@ function LayerStyle(feature) {
     opacity: 0.1,
     color: 'black',
     dashArray: '0',
-    //fillOpacity: 0.8
 	fillOpacity: getStyleOpacity(feature.properties.scPDSI)
 	};
 }	
@@ -241,7 +243,6 @@ var vueSlider = new Vue({
 	},
 	update(year) {
 	   this.year = year;
-       //this.year2 = parseInt(year); 	   
 	},
 	load(year) {
 		this.year2 = parseInt(year);
