@@ -120,8 +120,8 @@ map.removeLayer(markerClusters);
 for ( var i = 0; i < data.features.length; ++i )
 {
   var quote = data.features[i].properties.quote_text;
-  if(quote.length > 1024) {
-     quote = quote.substr(0,1020) + ' ...';
+  if(quote.length > 512) {
+     quote = quote.substr(0,500) + '   [ ... '+(quote.length-500).toString()+' more characters]';
   }	  
   var popup = '<b>Node:</b> ' + data.features[i].properties.node_label  
               + '<br/><b>Value:</b> ' + data.features[i].properties.value_label 
