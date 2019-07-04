@@ -3,12 +3,9 @@ null: Value or Author
 Add Legend Tambora
 Add Diagramm of Number of Drought Events (in slider  if possible)
 Switch On/Off Layer
-Add year to URL
 
 Add example for openlayer
-
 Add modes for own index, clustered on/off, ...
-
 Add diagramms and filter by Tmb-Type, Month, 
 
 

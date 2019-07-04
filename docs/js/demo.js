@@ -243,6 +243,7 @@ var vueSlider = new Vue({
 	},
 	update(year) {
 	   this.year = year;
+	   location.hash = '#' + this.year2.toString();
 	},
 	load(year) {
 		this.year2 = parseInt(year);
@@ -271,7 +272,14 @@ var vueSlider = new Vue({
 	},		
   },
   mounted () {
-	this.load('1540');
+	var year = '1540'; 
+    if(location.hash) {
+       var y = parseInt(location.hash.replace('#',''));
+	   if(y>999 && y<2050) {
+		  this.year2 = y;  
+	   }
+	}		
+	this.load(this.year2);
     //vueEventBus.$on('updatedParameters', e => { this.clickOnMap();})
   }
 }) 
