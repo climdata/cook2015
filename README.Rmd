@@ -30,9 +30,9 @@ Demo Application using leaflet: https://climdata.github.io/cook2015/
 ## Download Files
 
 Download files owda.txt & owda-xy.txt from:
- https://www.ncdc.noaa.gov/paleo-search/study/19419
-  https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
-  https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
+ * https://www.ncdc.noaa.gov/paleo-search/study/19419
+  * https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
+  * https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
   
 (On Windows use cygwin and add it to PATH)  
 
@@ -43,11 +43,20 @@ wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstru
 wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
 ```
 
+## Generate geoJSON files
+
 ```{sh}
 python owda_geojson.py
 ```
 
-# or install package reticulate
+
+## Generate CSV file for Germany only
+
+```{sh}
+python owda_avg_germany.py
+```
+
+### or install package reticulate
 ```{python python.reticulate = FALSE}
 print('I am python') 
 ```

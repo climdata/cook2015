@@ -29,19 +29,30 @@ Download files owda.txt & owda-xy.txt from:
  https://www.ncdc.noaa.gov/paleo-search/study/19419
   https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
   https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
-(On Windows use cygwin and add to path)  
+  
+(On Windows use cygwin and add it to PATH)  
 
 
 ```sh
 [ -f ./download/owda.txt ] && mv -f ./download/owda.txt ./download/owda.bck.txt
 wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
-[ -f owda.txt ] && mv -f owda-xy.txt owda-xy.bck.txt
+[ -f ./download/owda.txt ] && mv -f ./download/owda-xy.txt ./download/owda-xy.bck.txt
 wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
 ```
+
+## Generate geoJSON files
 
 
 ```sh
 python owda_geojson.py
+```
+
+
+## Generate CSV file for Germany only
+
+
+```sh
+python owda_avg_germany.py
 ```
 
 # or install package reticulate
