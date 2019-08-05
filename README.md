@@ -26,9 +26,9 @@ Demo Application using leaflet: https://climdata.github.io/cook2015/
 ## Download Files
 
 Download files owda.txt & owda-xy.txt from:
- https://www.ncdc.noaa.gov/paleo-search/study/19419
-  https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
-  https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
+ * https://www.ncdc.noaa.gov/paleo-search/study/19419
+  * https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
+  * https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
   
 (On Windows use cygwin and add it to PATH)  
 
@@ -55,12 +55,30 @@ python owda_geojson.py
 python owda_avg_germany.py
 ```
 
-# or install package reticulate
+## Plot Drought time line
 
-```python
-print('I am python') 
+
+```r
+#install.packages("ggplot2")
+require("ggplot2")
 ```
 
 ```
-## I am python
+## Loading required package: ggplot2
 ```
+
+```
+## Warning: package 'ggplot2' was built under R version 3.5.3
+```
+
+```r
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+py <- read.csv("https://raw.githubusercontent.com/climdata/cook2015/master/cook_de.csv", sep=",")
+mp <- ggplot()
+mp + geom_line(aes(y=py$DE, x=py$year)) 
+```
+
+![](README_files/figure-html/plot-1.png)<!-- -->
+
+
+
