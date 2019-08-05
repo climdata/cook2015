@@ -4,15 +4,17 @@ Created on Wed Jun 26 11:56:26 2019
 
 @author: Michael Kahle
 
-Download files owda.txt & owda-xy.txt from:
- https://www.ncdc.noaa.gov/paleo-search/study/19419
-  https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
-  https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
+ Download files owda.txt & owda-xy.txt from:
+  https://www.ncdc.noaa.gov/paleo-search/study/19419
+   https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
+   https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
   
-  Converts Old World Drought Atlas (Cook 2015 - doi: 10.1126/sciadv.1500561)  to geoJSON
+ Converts Old Drought Atlas (Cook et al 2015 - doi: 101126/sciadv.1500561) to geoJSON 
 """
 
 import codecs
+import os
+import math
 
 fileName1='owda.txt'
 fileName2='owda-xy.txt'
@@ -52,7 +54,11 @@ with open(fileName1, "r") as ins:
             data = line.split(' ')
             j=0;
             year = data[0].strip()
-            fileOut='drought_'+year+'.json'
+            century = int(math.floor(int(year)/100))
+            dirOut = 'geoJson/century_'+str(century)
+            if not os.path.exists(dirOut):
+              os.makedirs(dirOut)
+            fileOut=dirOut+'/drought_'+year+'.json'
             outfile = codecs.open(fileOut, "w", "utf-8")
             outfile.write('{"type":"FeatureCollection","features":[')
             notfirst=False

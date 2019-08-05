@@ -8,7 +8,11 @@ output:
   pdf_document: default
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 
+#names(knitr::knit_engines$get())
+```
 
 ## cook 2015
 
@@ -31,25 +35,18 @@ Download files owda.txt & owda-xy.txt from:
   https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
 (On Windows use cygwin and add to path)  
 
-
-```sh
+```{sh}
 [ -f owda.txt ] && mv -f owda.txt owda.bck.txt
 wget -q https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
 [ -f owda.txt ] && mv -f owda-xy.txt owda-xy.bck.txt
 wget -q https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
 ```
 
-
-```sh
+```{sh}
 python owda_geojson.py
 ```
 
 # or install package reticulate
-
-```python
+```{python python.reticulate = FALSE}
 print('I am python') 
-```
-
-```
-## I am python
 ```
