@@ -16,8 +16,8 @@ import codecs
 import os
 import math
 
-fileName1='owda.txt'
-fileName2='owda-xy.txt'
+fileName1='download/owda.txt'
+fileName2='download/owda-xy.txt'
 
 coord = {}
 

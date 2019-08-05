@@ -33,10 +33,10 @@ Download files owda.txt & owda-xy.txt from:
 
 
 ```sh
-[ -f owda.txt ] && mv -f owda.txt owda.bck.txt
-wget -q https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
+[ -f ./download/owda.txt ] && mv -f ./download/owda.txt ./download/owda.bck.txt
+wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
 [ -f owda.txt ] && mv -f owda-xy.txt owda-xy.bck.txt
-wget -q https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
+wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda-xy.txt
 ```
 
 
