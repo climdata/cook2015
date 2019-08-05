@@ -26,7 +26,7 @@ with open(fileName2, "r") as ins:
         coord2[g] = geo
 
 sep=','
-fileOut2='cooks_de.csv'
+fileOut2='cook_de.csv'
 outfile2 = codecs.open(fileOut2, "w", "utf-8")
 outfile2.write('"year"'+sep+'"NW"'+sep+'"NO"'+sep+'"SW"'+sep+'"SO"'+sep+'"DE"'+sep+'"countDE"'+"\n")
 

@@ -36,7 +36,7 @@ Download files owda.txt & owda-xy.txt from:
   
 (On Windows use cygwin and add it to PATH)  
 
-```{sh}
+```{sh downloads}
 [ -f ./download/owda.txt ] && mv -f ./download/owda.txt ./download/owda.bck.txt
 wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstructions/europe/owda.txt
 [ -f ./download/owda.txt ] && mv -f ./download/owda-xy.txt ./download/owda-xy.bck.txt
@@ -45,18 +45,27 @@ wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstru
 
 ## Generate geoJSON files
 
-```{sh}
+```{sh geojson}
 python owda_geojson.py
 ```
 
 
 ## Generate CSV file for Germany only
 
-```{sh}
+```{sh average}
 python owda_avg_germany.py
 ```
 
-### or install package reticulate
-```{python python.reticulate = FALSE}
-print('I am python') 
+## Plot Drought time line
+
+```{r plot, echo=TRUE}
+#install.packages("ggplot2")
+require("ggplot2")
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+py <- read.csv("https://raw.githubusercontent.com/climdata/cook2015/master/cook_de.csv", sep=",")
+mp <- ggplot()
+mp + geom_line(aes(y=py$DE, x=py$year)) 
 ```
+
+
+
