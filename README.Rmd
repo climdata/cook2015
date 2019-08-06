@@ -46,14 +46,15 @@ wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstru
 ## Generate geoJSON files
 
 ```{sh geojson}
-python owda_geojson.py
+python ./source/owda_geojson.py
 ```
+Demo Application using leaflet: https://climdata.github.io/cook2015/
 
 
 ## Generate CSV file for Germany only
 
 ```{sh average}
-python owda_avg_germany.py
+python ./source/owda_avg_germany.py
 ```
 
 ## Plot Drought time line
@@ -62,7 +63,7 @@ python owda_avg_germany.py
 #install.packages("ggplot2")
 require("ggplot2")
 #setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-py <- read.csv("https://raw.githubusercontent.com/climdata/cook2015/master/cook_de.csv", sep=",")
+py <- read.csv("https://raw.githubusercontent.com/climdata/cook2015/master/csv/cook_de.csv", sep=",")
 mp <- ggplot()
 mp + geom_line(aes(y=py$DE, x=py$year)) 
 ```

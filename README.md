@@ -44,15 +44,16 @@ wget -q -P download https://www1.ncdc.noaa.gov/pub/data/paleo/treering/reconstru
 
 
 ```sh
-python owda_geojson.py
+python ./source/owda_geojson.py
 ```
+Demo Application using leaflet: https://climdata.github.io/cook2015/
 
 
 ## Generate CSV file for Germany only
 
 
 ```sh
-python owda_avg_germany.py
+python ./source/owda_avg_germany.py
 ```
 
 ## Plot Drought time line
