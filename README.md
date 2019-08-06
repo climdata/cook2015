@@ -74,7 +74,7 @@ require("ggplot2")
 
 ```r
 #setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-py <- read.csv("https://raw.githubusercontent.com/climdata/cook2015/master/cook_de.csv", sep=",")
+py <- read.csv("https://raw.githubusercontent.com/climdata/cook2015/master/csv/cook_de.csv", sep=",")
 mp <- ggplot()
 mp + geom_line(aes(y=py$DE, x=py$year)) 
 ```
