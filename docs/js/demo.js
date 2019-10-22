@@ -73,7 +73,8 @@ var iconCodes = {
 "hunger (animals):null": {icon: 'star', markerColor: 'purple', iconColor: '#FFFFFF', shape: 'penta', prefix: 'icon'},
 "low water level:low water level (limited use)": {icon: 'ship', markerColor: 'blue', iconColor: '#000000', shape: 'circle', prefix: 'icon'},
 "thirst (humans):null": {icon: 'beer', markerColor: 'cyan', iconColor: '#000000', shape: 'penta', prefix: 'icon'},
-"precipitation frequency:never precipitation": {icon: 'umbrella', markerColor: 'cyan', iconColor: '#000000', shape: 'circle', prefix: 'icon'}
+"precipitation frequency:never precipitation": {icon: 'umbrella', markerColor: 'cyan', iconColor: '#000000', shape: 'circle', prefix: 'icon'},
+"other:other": {icon: 'circle', markerColor: 'white', iconColor: '#000000', shape: 'circle', prefix: 'icon'}
 }	
 
 //certificate
@@ -83,6 +84,8 @@ function getMarker(event) {
 
 	if(!data) {
 	   data = {icon: 'circle', markerColor: 'white', iconColor: '#000000', shape: 'circle', prefix: 'icon'}
+       key = "other:other"
+	   return null; // here: prefer to not show unknown icons...
 	}
 	if (!data.marker) {
 		iconCodes[key].marker = L.ExtraMarkers.icon(data);
@@ -141,10 +144,12 @@ for ( var i = 0; i < data.features.length; ++i )
 	  popup += '<b>More details on:</b> <a target="_blank" href="https://www.tambora.org/index.php/grouping/event/list?g[qid]=' 
 			    + data.features[i].properties.quote_id.toString() + '" >tambora.org</a>';
 	}			
-
-  var m = L.marker( [data.features[i].properties.latitude, data.features[i].properties.longitude], {icon: getMarker(data.features[i].properties)} )
+  var marker = getMarker(data.features[i].properties);
+  if(marker) {
+    var m = L.marker( [data.features[i].properties.latitude, data.features[i].properties.longitude], {icon: marker} )
                   .bindPopup( popup ); 
-  markerClusters.addLayer( m );
+    markerClusters.addLayer( m );
+  }
 }
 		  
 map.addLayer( markerClusters );
@@ -256,7 +261,16 @@ var vueSlider = new Vue({
 		       loadGeoJson(response.data);	
 			   this.update(year);   
 	    	});	
-		var tmbJsonUrl = 'https://www.tambora.org/index.php/grouping/event/droughts?year='+year;
+		  var tmbBaseUrl = 'https://www.tambora.org/index.php/grouping/event/geojson?limit=5000';
+          var yearFilter = '&t[yb]='+year+'&t[ye]='+year 		  
+		  var nodeFilter = '&g[nd]=90,590,591,87,819,571'
+		  var valueFilter = '&g[va]=86,82,6,104,101,41,48,142,57,134,124,125,123'
+		  var bbox = map.getBounds();
+		  // don't use boxFilter without doing reload on zoom....
+		  var boxFilter = 's[lt1]='+ bbox._southWest.lat + 's[lt2]='+ bbox._northEast.lat +
+		                  's[lg1]='+ bbox._southWest.lng + 's[lg2]='+ bbox._northEast.lng
+		  var tmbJsonUrl = tmbBaseUrl + yearFilter + nodeFilter + valueFilter // + boxFilter
+		
 		axios
             .get(tmbJsonUrl)
             .then(response => { 

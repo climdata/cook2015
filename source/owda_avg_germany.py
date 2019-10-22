@@ -28,7 +28,7 @@ with open(fileName2, "r") as ins:
 sep=','
 fileOut2='csv/cook_de.csv'
 outfile2 = codecs.open(fileOut2, "w", "utf-8")
-outfile2.write('"year"'+sep+'"NW"'+sep+'"NO"'+sep+'"SW"'+sep+'"SO"'+sep+'"DE"'+sep+'"countDE"'+"\n")
+outfile2.write('"year"'+sep+'"month"'+sep+'"time"'+sep+'"ts"'+sep+'"NW"'+sep+'"NO"'+sep+'"SW"'+sep+'"SO"'+sep+'"DE"'+sep+'"countDE"'+"\n")
 
 with open(fileName1, "r") as ins:
     i=0
@@ -78,6 +78,9 @@ with open(fileName1, "r") as ins:
                             ScpdsiCounts['DE'] += 1.0                                
                j=j+1
             outfile2.write(str(year)+sep)
+            outfile2.write('6'+sep)
+            outfile2.write(str(year)+'-06-01 00:00:00'+sep)
+            outfile2.write(str((float(year)+0.5))+sep)		
             outfile2.write(str(ScpdsiValues['NW']/ScpdsiCounts['NW'])+sep)
             outfile2.write(str(ScpdsiValues['NO']/ScpdsiCounts['NO'])+sep)
             outfile2.write(str(ScpdsiValues['SW']/ScpdsiCounts['SW'])+sep)            
