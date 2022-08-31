@@ -62,9 +62,9 @@ with open(fileName1, "r") as ins:
                       if((coords['latitude'] < 15) and 
                          (coords['latitude'] > 5) and 
                          (coords['longitude'] < 55) and 
-                         (coords['longitude'] > 45)):
+                         (coords['longitude'] > 47)):
                             key = ''
-                            if(coords['longitude'] < 50):
+                            if(coords['longitude'] < 51):
                                  key += 'S'
                             else:
                                  key += 'N'
